@@ -24,11 +24,13 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.nitish.android.karto.R
 import com.nitish.android.karto.domain.login.UserCredentials
 
 @Composable
@@ -51,14 +53,14 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
             modifier = Modifier.fillMaxWidth(),
             value = email,
             onValueChange = { email = it },
-            label = { Text("Email") },
+            label = { Text(stringResource(R.string.email)) },
         )
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = password,
             onValueChange = { password = it },
-            label = { Text("Password") },
+            label = { Text(stringResource(R.string.password)) },
             visualTransformation = if (passwordVisible) {
                 VisualTransformation.None
             } else {
@@ -84,13 +86,13 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
             },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Login")
+            Text(stringResource(R.string.login))
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        val info = if (loginUiModel.isLoading) "Loading......"
-        else if (loginUiModel.isSuccess == true) "Yo ho , you have successfully logged in..."
+        val info = if (loginUiModel.isLoading) stringResource(R.string.loading)
+        else if (loginUiModel.isSuccess == true) stringResource(R.string.success_message)
         else if (loginUiModel.isSuccess == false) loginUiModel.errorMessage.orEmpty()
         else ""
         Text(info)

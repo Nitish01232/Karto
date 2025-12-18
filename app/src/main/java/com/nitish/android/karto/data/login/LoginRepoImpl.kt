@@ -1,5 +1,6 @@
 package com.nitish.android.karto.data.login
 
+import com.nitish.android.karto.common.LOGIN_CREDENTIALS_EMPTY_ERROR
 import com.nitish.android.karto.domain.login.LoginRepo
 import com.nitish.android.karto.domain.login.LoginResponse
 import com.nitish.android.karto.domain.login.UserCredentials
@@ -15,11 +16,11 @@ class LoginRepoImpl : LoginRepo {
             && userCredentials.password == "1234"
         ) {
             LoginResponse(
-                isSuccess = true
+                isSuccess = true,
             )
         } else LoginResponse(
             isSuccess = false,
-            errorMessage = "Please enter valid Email id and Password",
+            errorMessage = LOGIN_CREDENTIALS_EMPTY_ERROR,
         )
     }
 

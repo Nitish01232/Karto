@@ -1,5 +1,7 @@
 package com.nitish.android.karto.domain.login
 
+import com.nitish.android.karto.common.LOGIN_CREDENTIALS_ENTER_EMAIL_ID
+import com.nitish.android.karto.common.LOGIN_CREDENTIALS_ENTER_PASSWORD
 import com.nitish.android.karto.data.login.LoginRepoImpl
 import com.nitish.android.karto.data.login.LoginUiModel
 import kotlinx.coroutines.delay
@@ -17,7 +19,7 @@ class LoginUseCase {
                     LoginUiModel(
                         isLoading = false,
                         isSuccess = false,
-                        errorMessage = "Please enter Email Id",
+                        errorMessage = LOGIN_CREDENTIALS_ENTER_EMAIL_ID,
                     )
                 )
             }
@@ -27,7 +29,7 @@ class LoginUseCase {
                     LoginUiModel(
                         isLoading = false,
                         isSuccess = false,
-                        errorMessage = "Please enter Password",
+                        errorMessage = LOGIN_CREDENTIALS_ENTER_PASSWORD,
                     )
                 )
             }
