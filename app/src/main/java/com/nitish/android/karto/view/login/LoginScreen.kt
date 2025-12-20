@@ -16,6 +16,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,9 +35,21 @@ import com.nitish.android.karto.R
 import com.nitish.android.karto.domain.login.UserCredentials
 
 @Composable
-fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
+fun LoginScreen(
+    loginViewModel: LoginViewModel = viewModel(),
+    navigateToProductScreen: () -> Unit
+) {
 
     val loginUiModel by loginViewModel.uiState.collectAsState()
+
+    // Effect
+    LaunchedEffect(Unit) {
+        loginViewModel.effect.collect { effect ->
+            when (effect) {
+                is LoginViewModel.LoginEffect.OnLoginSuccess -> navigateToProductScreen()
+            }
+        }
+    }
 
     var email by rememberSaveable { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -103,5 +116,5 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
+    LoginScreen(navigateToProductScreen = {})
 }
