@@ -1,9 +1,8 @@
 package com.nitish.android.karto.data.login
 
-import com.nitish.android.karto.data.remote.AuthApi
-import com.nitish.android.karto.data.remote.RetrofitClient
-import com.nitish.android.karto.data.remote.dto.NetworkLoginRequest
-import com.nitish.android.karto.data.remote.dto.NetworkLoginResponse
+import com.nitish.android.karto.data.network_common.RetrofitClient
+import com.nitish.android.karto.data.login.dto.NetworkLoginRequest
+import com.nitish.android.karto.data.login.dto.NetworkLoginResponse
 
 class LoginDataSource() {
     private val api: AuthApi by lazy {

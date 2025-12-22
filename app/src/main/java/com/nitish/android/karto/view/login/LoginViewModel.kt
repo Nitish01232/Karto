@@ -3,9 +3,8 @@ package com.nitish.android.karto.view.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nitish.android.karto.common.Result
-import com.nitish.android.karto.data.login.LoginUiModel
 import com.nitish.android.karto.domain.login.LoginUseCase
-import com.nitish.android.karto.domain.login.UserCredentials
+import com.nitish.android.karto.domain.login.model.LoginUiModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,11 +28,14 @@ class LoginViewModel : ViewModel() {
     }
 
     var loginJob: Job? = null
-    fun login(userCredentials: UserCredentials) {
+    fun login(
+        email: String,
+        password: String,
+    ) {
         loginJob?.cancel()
         loginJob = viewModelScope.launch {
             loginUseCase.invoke(
-                userCredentials.email, userCredentials.password
+                email, password
             ).collect { result ->
 
                 when (result) {

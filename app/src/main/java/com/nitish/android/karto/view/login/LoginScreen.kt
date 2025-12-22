@@ -33,7 +33,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nitish.android.karto.R
-import com.nitish.android.karto.domain.login.UserCredentials
 
 @Composable
 fun LoginRoute(
@@ -75,10 +74,8 @@ fun LoginRoute(
             },
             onLoginButtonClick = {
                 loginViewModel.login(
-                    UserCredentials(
-                        email = emailId,
-                        password = password,
-                    )
+                    email = emailId,
+                    password = password,
                 )
             },
             info = loginUiModel.errorMessage.orEmpty()

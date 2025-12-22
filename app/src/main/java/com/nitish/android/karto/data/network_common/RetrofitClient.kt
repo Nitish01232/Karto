@@ -1,4 +1,4 @@
-package com.nitish.android.karto.data.remote
+package com.nitish.android.karto.data.network_common
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

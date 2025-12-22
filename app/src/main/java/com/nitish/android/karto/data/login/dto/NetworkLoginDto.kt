@@ -1,4 +1,4 @@
-package com.nitish.android.karto.data.remote.dto
+package com.nitish.android.karto.data.login.dto
 
 data class NetworkLoginRequest(
     val username: String,

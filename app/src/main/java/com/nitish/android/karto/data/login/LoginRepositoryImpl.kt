@@ -3,8 +3,8 @@ package com.nitish.android.karto.data.login
 import com.google.gson.Gson
 import com.nitish.android.karto.common.Result
 import com.nitish.android.karto.data.login.mapper.toUserDetails
-import com.nitish.android.karto.data.remote.dto.NetworkErrorResponse
-import com.nitish.android.karto.data.remote.dto.NetworkLoginRequest
+import com.nitish.android.karto.data.login.dto.NetworkErrorResponse
+import com.nitish.android.karto.data.login.dto.NetworkLoginRequest
 import com.nitish.android.karto.domain.login.LoginRepository
 import com.nitish.android.karto.domain.login.model.UserDetails
 import kotlinx.coroutines.flow.Flow
