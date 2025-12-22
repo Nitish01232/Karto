@@ -40,7 +40,7 @@ fun LoginRoute(
     loginViewModel: LoginViewModel = viewModel(),
     navigateToProductScreen: () -> Unit
 ) {
-    val loginUiModel by loginViewModel.uiState.collectAsState()
+    val loginUiModel by loginViewModel.state.collectAsState()
 
     // Effect
     LaunchedEffect(Unit) {
