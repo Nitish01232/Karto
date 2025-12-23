@@ -1,33 +1,28 @@
-package com.nitish.android.karto.data.login
+package com.nitish.android.karto.data.products
 
 import com.google.gson.Gson
 import com.nitish.android.karto.common.Result
-import com.nitish.android.karto.data.login.dto.NetworkLoginRequest
-import com.nitish.android.karto.data.login.mapper.toUserDetails
 import com.nitish.android.karto.data.network_common.NetworkErrorResponse
-import com.nitish.android.karto.domain.login.LoginRepository
-import com.nitish.android.karto.domain.login.model.UserDetails
+import com.nitish.android.karto.data.products.mapper.toProduct
+import com.nitish.android.karto.domain.products.ProductsRepository
+import com.nitish.android.karto.domain.products.model.Product
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 
-class LoginRepositoryImpl() : LoginRepository {
+class ProductsRepositoryImpl() : ProductsRepository {
 
-    val dataSource: LoginDataSource = LoginDataSource()
+    val dataSource: ProductDataSource = ProductDataSource()
 
-    override fun login(
-        username: String,
-        password: String
-    ): Flow<Result<UserDetails>> = flow {
+    override fun getProducts(): Flow<Result<List<Product>>> = flow {
         try {
             emit(Result.Loading)
-            val response = dataSource.login(
-                NetworkLoginRequest(username, password)
-            )
-            emit(Result.Success(response.toUserDetails()))
+            delay(2000)
+            val response = dataSource.getProducts()
+            emit(Result.Success(response.products?.map { it.toProduct() } ?: emptyList()))
         } catch (e: HttpException) {
 
-            // 🔹 HTTP errors (400, 401, 500...)
             val message = e.response()
                 ?.errorBody()
                 ?.charStream()
@@ -40,10 +35,11 @@ class LoginRepositoryImpl() : LoginRepository {
         } catch (e: Exception) {
             emit(
                 Result.Error(
-                    message = e.message ?: "Login failed",
+                    message = e.message ?: "An unexpected error occurred",
                     throwable = e
                 )
             )
         }
     }
+
 }

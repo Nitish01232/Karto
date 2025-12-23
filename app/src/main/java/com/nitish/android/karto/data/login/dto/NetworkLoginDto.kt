@@ -17,7 +17,3 @@ data class NetworkLoginResponse(
     val refreshToken: String,
     val message: String,
 )
-
-data class NetworkErrorResponse(
-    val message: String
-)

@@ -50,8 +50,8 @@ fun LoginRoute(
         }
     }
 
-    var emailId by rememberSaveable { mutableStateOf("nitish@gmail.com") }
-    var password by remember { mutableStateOf("1234") }
+    var emailId by rememberSaveable { mutableStateOf("emilys") }
+    var password by remember { mutableStateOf("emilyspass") }
     var passwordVisible by remember { mutableStateOf(false) }
 
     Box {
