@@ -22,6 +22,7 @@ fun NetworkProduct.toProduct() = Product(
     minimumOrderQuantity = minimumOrderQuantity ?: 0,
     thumbnail = thumbnail.orEmpty(),
     images = images.orEmpty(),
+    discountPrice = calculateDiscountedPrice(price ?: 0.0F, discountPercentage ?: 0.0F),
 )
 
 fun NetworkReview.toReview() = Review(
@@ -31,3 +32,8 @@ fun NetworkReview.toReview() = Review(
     reviewName = reviewName.orEmpty(),
     reviewerEmail = reviewerEmail.orEmpty(),
 )
+
+fun calculateDiscountedPrice(
+    price: Float,
+    discountPercentage: Float,
+) = "%.2f".format(price - (price * discountPercentage / 100f)).toFloat()

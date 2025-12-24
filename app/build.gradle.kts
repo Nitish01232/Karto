@@ -68,4 +68,7 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging)
 
+    //Image Rendering from url
+    implementation("io.coil-kt:coil-compose:2.7.0")
+
 }

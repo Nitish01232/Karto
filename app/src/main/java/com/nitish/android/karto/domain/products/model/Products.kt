@@ -16,7 +16,8 @@ data class Product(
     val returnPolicy: String,
     val minimumOrderQuantity: Int,
     val thumbnail: String,
-    val images: List<String>
+    val images: List<String>,
+    val discountPrice: Float,
 )
 
 data class Review(

@@ -18,7 +18,7 @@ class ProductsRepositoryImpl() : ProductsRepository {
     override fun getProducts(): Flow<Result<List<Product>>> = flow {
         try {
             emit(Result.Loading)
-            delay(2000)
+            delay(1000)
             val response = dataSource.getProducts()
             emit(Result.Success(response.products?.map { it.toProduct() } ?: emptyList()))
         } catch (e: HttpException) {

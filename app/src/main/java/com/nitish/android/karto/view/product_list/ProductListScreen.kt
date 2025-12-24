@@ -104,7 +104,7 @@ fun ProductListScreenContentPreview() {
             title = "iPhone 9",
             description = "An apple mobile which is nothing like apple",
             price = 549.0f,
-            discountPercentage = 12.96f,
+            discountPercentage = 12.00F,
             rating = 4.69f,
             stock = 94,
             brand = "Apple",
@@ -115,14 +115,15 @@ fun ProductListScreenContentPreview() {
             sku = "",
             reviews = listOf(),
             returnPolicy = "",
-            minimumOrderQuantity = 0
+            minimumOrderQuantity = 0,
+            discountPrice = 1.0F,
         ),
         Product(
             id = 2,
             title = "iPhone X",
             description = "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
             price = 899.0f,
-            discountPercentage = 17.94f,
+            discountPercentage = 17.00F,
             rating = 4.44f,
             stock = 34,
             brand = "Apple",
@@ -133,7 +134,8 @@ fun ProductListScreenContentPreview() {
             sku = "",
             reviews = listOf(),
             returnPolicy = "",
-            minimumOrderQuantity = 0
+            minimumOrderQuantity = 0,
+            discountPrice = 1.0F,
         ),
     )
     ProductListScreen(
