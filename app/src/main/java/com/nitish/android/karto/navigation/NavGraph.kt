@@ -5,7 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.nitish.android.karto.view.login.LoginRoute
-import com.nitish.android.karto.view.product_list.ProductListScreen
+import com.nitish.android.karto.view.product_list.ProductListRoute
 
 @Composable
 fun NavGraph() {
@@ -17,7 +17,12 @@ fun NavGraph() {
             })
         }
         composable(Routes.PRODUCT_LIST) {
-            ProductListScreen()
+            ProductListRoute(
+                onProductClick = { productId ->
+                    // TODO: Navigate to product detail screen using productId
+                    println("Clicked product with ID: $productId")
+                }
+            )
         }
     }
 }

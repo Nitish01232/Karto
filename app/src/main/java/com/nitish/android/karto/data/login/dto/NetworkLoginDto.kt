@@ -1,4 +1,4 @@
-package com.nitish.android.karto.data.remote.dto
+package com.nitish.android.karto.data.login.dto
 
 data class NetworkLoginRequest(
     val username: String,
@@ -16,8 +16,4 @@ data class NetworkLoginResponse(
     val accessToken: String,
     val refreshToken: String,
     val message: String,
-)
-
-data class NetworkErrorResponse(
-    val message: String
 )

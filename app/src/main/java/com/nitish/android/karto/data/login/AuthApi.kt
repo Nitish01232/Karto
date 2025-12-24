@@ -1,7 +1,7 @@
-package com.nitish.android.karto.data.remote
+package com.nitish.android.karto.data.login
 
-import com.nitish.android.karto.data.remote.dto.NetworkLoginRequest
-import com.nitish.android.karto.data.remote.dto.NetworkLoginResponse
+import com.nitish.android.karto.data.login.dto.NetworkLoginRequest
+import com.nitish.android.karto.data.login.dto.NetworkLoginResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 

@@ -1,6 +1,6 @@
 package com.nitish.android.karto.data.login.mapper
 
-import com.nitish.android.karto.data.remote.dto.NetworkLoginResponse
+import com.nitish.android.karto.data.login.dto.NetworkLoginResponse
 import com.nitish.android.karto.domain.login.model.UserDetails
 
 fun NetworkLoginResponse.toUserDetails(): UserDetails {
