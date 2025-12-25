@@ -26,9 +26,12 @@ class ProductsRepositoryImpl() : ProductsRepository {
             val message = e.response()
                 ?.errorBody()
                 ?.charStream()
-                ?.let {
-                    Gson().fromJson(it, NetworkErrorResponse::class.java).message
-                } ?: "Something went wrong"
+                ?.let { reader ->
+                    runCatching {
+                        Gson().fromJson(reader, NetworkErrorResponse::class.java)
+                    }.getOrNull()?.message
+                }
+                ?: "Something went wrong"
 
             emit(Result.Error(message = message, throwable = e))
 
@@ -51,9 +54,12 @@ class ProductsRepositoryImpl() : ProductsRepository {
             val message = e.response()
                 ?.errorBody()
                 ?.charStream()
-                ?.let {
-                    Gson().fromJson(it, NetworkErrorResponse::class.java).message
-                } ?: "Something went wrong"
+                ?.let { reader ->
+                    runCatching {
+                        Gson().fromJson(reader, NetworkErrorResponse::class.java)
+                    }.getOrNull()?.message
+                }
+                ?: "Something went wrong"
 
             emit(Result.Error(message = message, throwable = e))
         } catch (e: Exception) {
