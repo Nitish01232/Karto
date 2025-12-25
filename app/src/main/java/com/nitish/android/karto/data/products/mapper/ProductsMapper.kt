@@ -4,6 +4,7 @@ import com.nitish.android.karto.data.products.dto.NetworkProduct
 import com.nitish.android.karto.data.products.dto.NetworkReview
 import com.nitish.android.karto.domain.products.model.Product
 import com.nitish.android.karto.domain.products.model.Review
+import kotlin.math.roundToInt
 
 fun NetworkProduct.toProduct() = Product(
     id = id ?: 0,
@@ -35,5 +36,11 @@ fun NetworkReview.toReview() = Review(
 
 fun calculateDiscountedPrice(
     price: Float,
-    discountPercentage: Float,
-) = "%.2f".format(price - (price * discountPercentage / 100f)).toFloat()
+    discountPercentage: Float
+): Float {
+    if (price <= 0f) return 0f
+    if (discountPercentage <= 0f) return price
+
+    return ((price - (price * discountPercentage / 100f)) * 100)
+        .roundToInt() / 100f
+}

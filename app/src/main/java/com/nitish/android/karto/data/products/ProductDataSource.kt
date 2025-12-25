@@ -11,4 +11,6 @@ class ProductDataSource() {
     suspend fun getProducts(): NetworkProductsResponse =
         api.getProducts()
 
+    suspend fun getProductDetails(productId: Int) = api.getProductDetails(productId)
+
 }
