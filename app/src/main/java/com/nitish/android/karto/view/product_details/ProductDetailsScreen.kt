@@ -186,7 +186,6 @@ fun ProductDetailsScreen(
                     color = MaterialTheme.colorScheme.primary
                 )
 
-
                 Text(
                     text = "$${String.format("%.2f", product.price)}",
                     color = Color.Gray,
@@ -195,15 +194,20 @@ fun ProductDetailsScreen(
         }
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Rating
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            modifier = modifier,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
             RatingStars(rating = product.rating)
             Spacer(modifier = Modifier.width(4.dp))
-            Text(text = "(${product.rating})", style = MaterialTheme.typography.bodyMedium)
+            Text(
+                text = "(${product.rating})",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Description
         Text(
             text = product.description,
             style = MaterialTheme.typography.bodyLarge,
@@ -237,6 +241,28 @@ fun ProductDetailsScreen(
         ) {
             Text("Add to Cart", fontSize = 18.sp)
         }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text(
+            modifier = Modifier
+                .padding(bottom = 8.dp),
+            text = "Customer Reviews",
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold,
+        )
+
+        if (product.reviews.isNotEmpty()) {
+            Column {
+                product.reviews.forEach { review ->
+                    ReviewCard(
+                        review = review
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+            }
+        }
+
     }
 }
 

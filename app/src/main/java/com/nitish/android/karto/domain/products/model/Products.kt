@@ -24,6 +24,7 @@ data class Review(
     val rating: Int,
     val comment: String,
     val date: String,
-    val reviewName: String,
+    val reviewerName: String,
     val reviewerEmail: String,
+    val dateForUi: String,
 )

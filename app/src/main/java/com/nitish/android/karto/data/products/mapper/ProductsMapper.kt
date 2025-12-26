@@ -1,5 +1,8 @@
 package com.nitish.android.karto.data.products.mapper
 
+import com.nitish.android.karto.common.DATE_FORMAT_DD_MM_YYYY
+import com.nitish.android.karto.common.DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS_Z
+import com.nitish.android.karto.common.formatDate
 import com.nitish.android.karto.data.products.dto.NetworkProduct
 import com.nitish.android.karto.data.products.dto.NetworkReview
 import com.nitish.android.karto.domain.products.model.Product
@@ -30,8 +33,13 @@ fun NetworkReview.toReview() = Review(
     rating = rating ?: 0,
     comment = comment.orEmpty(),
     date = date.orEmpty(),
-    reviewName = reviewName.orEmpty(),
+    reviewerName = reviewerName.orEmpty(),
     reviewerEmail = reviewerEmail.orEmpty(),
+    dateForUi = formatDate(
+        inputFormat = DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS_Z,
+        outputFormat = DATE_FORMAT_DD_MM_YYYY,
+        dateString = date.orEmpty(),
+    ),
 )
 
 fun calculateDiscountedPrice(
