@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nitish.android.karto.common.Result
 import com.nitish.android.karto.domain.products.GetProductListUseCase
-import com.nitish.android.karto.domain.products.model.Product
+import com.nitish.android.karto.domain.products.model.ProductListState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -48,9 +48,3 @@ class ProductListViewModel : ViewModel() {
         }
     }
 }
-
-data class ProductListState(
-    val products: List<Product> = emptyList(),
-    val isLoading: Boolean = false,
-    val error: String? = null
-)

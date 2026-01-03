@@ -2,58 +2,69 @@ package com.nitish.android.karto.view.product_list
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.nitish.android.karto.R
 import com.nitish.android.karto.domain.products.model.Product
+import com.nitish.android.karto.domain.products.model.ProductListState
 import com.nitish.android.karto.view.product_list.componants.ProductItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ProductListRoute(
+    viewModel: ProductListViewModel = viewModel(),
     onProductClick: (Int) -> Unit,
-    viewModel: ProductListViewModel = viewModel()
 ) {
     val uiState by viewModel.state.collectAsStateWithLifecycle()
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
+
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            TopAppBar(
-                modifier = Modifier,
+            CenterAlignedTopAppBar(
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background,
+                ),
                 title = {
                     Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .defaultMinSize(minWidth = 44.dp),
-                        text = "Product Screen"
+                        "Karto",
+                        textAlign = TextAlign.Center,
                     )
-                }
+                },
+                scrollBehavior = scrollBehavior
             )
         },
     ) { innerPaddings ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues = innerPaddings)
+                .padding(innerPaddings)
                 .background(MaterialTheme.colorScheme.background)
         ) {
             if (uiState.isLoading) {
@@ -61,7 +72,7 @@ fun ProductListRoute(
             } else if (uiState.products.isEmpty()) {
                 Text(
                     text = uiState.error
-                        ?: "No Products Available", // TODO add this string in string.xml
+                        ?: stringResource(R.string.no_products_available),
                     modifier = Modifier.align(Alignment.Center)
                 )
             } else {
@@ -82,8 +93,10 @@ fun ProductListScreen(
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        modifier = Modifier
-            .padding(8.dp)
+        modifier = Modifier,
+        contentPadding = PaddingValues(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(uiState.products) { product ->
             ProductItem(

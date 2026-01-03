@@ -26,12 +26,42 @@ class ProductsRepositoryImpl() : ProductsRepository {
             val message = e.response()
                 ?.errorBody()
                 ?.charStream()
-                ?.let {
-                    Gson().fromJson(it, NetworkErrorResponse::class.java).message
-                } ?: "Something went wrong"
+                ?.let { reader ->
+                    runCatching {
+                        Gson().fromJson(reader, NetworkErrorResponse::class.java)
+                    }.getOrNull()?.message
+                }
+                ?: "Something went wrong"
 
             emit(Result.Error(message = message, throwable = e))
 
+        } catch (e: Exception) {
+            emit(
+                Result.Error(
+                    message = e.message ?: "An unexpected error occurred",
+                    throwable = e
+                )
+            )
+        }
+    }
+
+    override fun getProductDetails(productId: Int): Flow<Result<Product>> = flow {
+        try {
+            emit(Result.Loading)
+            val result = dataSource.getProductDetails(productId).toProduct()
+            emit(Result.Success(result))
+        } catch (e: HttpException) {
+            val message = e.response()
+                ?.errorBody()
+                ?.charStream()
+                ?.let { reader ->
+                    runCatching {
+                        Gson().fromJson(reader, NetworkErrorResponse::class.java)
+                    }.getOrNull()?.message
+                }
+                ?: "Something went wrong"
+
+            emit(Result.Error(message = message, throwable = e))
         } catch (e: Exception) {
             emit(
                 Result.Error(
