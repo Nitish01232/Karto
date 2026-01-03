@@ -11,11 +11,12 @@ import com.nitish.android.karto.view.login.LoginRoute
 import com.nitish.android.karto.view.product_details.ProductDetailsRoute
 import com.nitish.android.karto.view.product_details.ProductDetailsViewModel
 import com.nitish.android.karto.view.product_list.ProductListRoute
+import com.nitish.android.karto.view.splash_screen.SplashScreen
 
 @Composable
 fun NavGraph() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Routes.LOGIN) {
+    NavHost(navController = navController, startDestination = Routes.SPLASH) {
         composable(Routes.LOGIN) {
             LoginRoute(navigateToProductScreen = {
                 navController.navigate(Routes.PRODUCT_LIST)
@@ -36,6 +37,11 @@ fun NavGraph() {
             ProductDetailsRoute(
                 onBackClick = { navController.popBackStack() },
                 viewModel = viewModel
+            )
+        }
+        composable(Routes.SPLASH) {
+            SplashScreen(
+                navigateToNextScreen = { navController.navigate(Routes.LOGIN) }
             )
         }
     }

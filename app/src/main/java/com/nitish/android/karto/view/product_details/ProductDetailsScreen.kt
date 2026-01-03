@@ -216,10 +216,20 @@ fun ProductDetailsScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         // Brand and Stock
-        Text(
-            text = "Brand: ${product.brand}",
-            style = MaterialTheme.typography.bodyMedium
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+
+        ) {
+            Text(
+                text = "Brand: ${product.brand}",
+                style = MaterialTheme.typography.bodyMedium
+            )
+            Text(
+                text = "${product.returnPolicy}"
+            )
+        }
         Text(
             text = "In Stock: ${product.stock}",
             style = MaterialTheme.typography.bodyMedium,

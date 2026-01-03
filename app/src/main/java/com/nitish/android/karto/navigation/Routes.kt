@@ -5,5 +5,6 @@ object Routes {
     const val PRODUCT_LIST = "productList"
     const val PRODUCT_DETAILS = "productDetails/{productId}"
 
+    const val SPLASH = "splash"
     fun productDetails(productId: Int) = "productDetails/$productId"
 }
